@@ -74,6 +74,13 @@ public class MinimaDistancia implements ClasificadorInterface{
        aux.setClase(this.medias.get(i).getClase());
     }
         
+
+    public void clasificarConjunto (ArrayList<Patron> conjunto){
+        //Para cada uno elemento de la coleccion se genera un proceso
+        for (Patron aux:conjunto){
+            clasificar(aux);
+        }
+    }
   
 
 
