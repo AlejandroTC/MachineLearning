@@ -61,6 +61,7 @@ public class Entrenamiento {
 
                     linea.clear();  //se limpia la lista para continuar con la sigueinte linea
                 }
+                md.clasificarConjunto(conjunto);
                 System.out.println();
             }
         } catch (IOException ex) {
