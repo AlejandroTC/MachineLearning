@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class MinimaDistancia implements ClasificadorInterface{
 
     ArrayList<PatronRepresentativo> medias;
+    double eficacia;
     
     @Override
     public void entrenar(ArrayList<Patron> aux) {
@@ -68,20 +69,26 @@ public class MinimaDistancia implements ClasificadorInterface{
            if(j<di){
                di = j;
                i = x;
-           }
-       
+           }       
        }
-       aux.setClase(this.medias.get(i).getClase());
+       //aux.setClase(this.medias.get(i).getClase());
+       aux.setClaseResultante(this.medias.get(i).getClase()); 
     }
         
-
     public void clasificarConjunto (ArrayList<Patron> conjunto){
         //Para cada uno elemento de la coleccion se genera un proceso
+        this.eficacia = 0;      //Para obtener el valor de la eficacia
+        int c=0;                //Para contar en cuantos fue eficaz
         for (Patron aux:conjunto){
             clasificar(aux);
+            if(aux.getClase() == aux.getClaseResultante())c++;  
+            //Despues de clasificar, se obtiene la clase y clase resultante para 
+            //verificar si son iguales, si es asi se suma a la cuenta
         }
-    }
-  
 
-
+        //Calcular la eficacia del clasificaor
+        //Proceso iterativo de la coleccion "conjunto"
+        double h = (double)100/conjunto.size();
+        this.eficacia = h *c; //Finalizado la clasificacion etnonces se obtiene el %
+    } 
 }

@@ -12,17 +12,20 @@ package data;
 public class Patron {
     
     private double [] vector;
-    private String clase;
+    private String clase;           //La clase original  
+    private String claseResultante; //La clase ----
 
     public Patron(double[] vector, 
             String clase) {
         this.vector = vector;
         this.clase = clase;
+        this.claseResultante = "Desconocida";
     }
 
     public Patron(int n) {
         this.vector = new double[n];
         this.clase = "Desconocida";
+        this.claseResultante = "Desconocida";
     }
 
     /**
@@ -53,7 +56,16 @@ public class Patron {
         this.clase = clase;
     }
     
-    
+    public String getClaseResultante() {
+        return claseResultante;
+    }
+
+    /**
+     * @param clase the clase to set
+     */
+    public void setClaseResultante(String claseResultante) {
+        this.claseResultante = claseResultante;
+    }
     
     
     
