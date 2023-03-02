@@ -5,6 +5,8 @@
  */
 package data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author roban
@@ -20,4 +22,19 @@ public class Herramientas {
         }
     return Math.sqrt(acu);
     }
+
+    public static void ordenarDistancias(ArrayList<Kdistance> distancias){
+        Kdistance temp;
+        for (int i=1; i<distancias.size(); i++){
+            for(int j=0; j< distancias.size() - i; j++){
+                if (distancias.get(j).getDistancia() > distancias.get(j+1).getDistancia()){
+                    temp = new Kdistance(distancias.get(j).getDistancia(), distancias.get(j).getVecinos());
+                    distancias.set(j, new Kdistance(temp.getDistancia(), temp.getVecinos()));
+                    distancias.set(j+1, temp);
+                }
+            }
+        }
+    }
+
+
 }

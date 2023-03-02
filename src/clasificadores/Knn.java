@@ -28,22 +28,17 @@ public class Knn implements ClasificadorInterface{
 
     @Override
     public void clasificar(Patron patron) {     //Clasificación del patrón
-        ArrayList<Kdistance> vecinos = construirVecindades(patron);
-        String resultado = verificarVecindades(vecinos);
-        patron.setClaseResultante(resultado);
-    }
-
-    public void clasificaConjunto(ArrayList<Patron> instancias) {
-        int total = instancias.size();
-        int correctas = 0;
-        for (Patron patron : instancias) {
-            clasificar(patron);
-            if (patron.getClaseResultante().equals(patron.getClase())) {
-                correctas++;
+        ArrayList<Kdistance> vecinos = new ArrayList<>();
+        for (Patron aux : this.instancias) {
+            String clase = aux.getClase();
+            double dist = Herramientas.distanciaEuclidiana(patron, aux);
+            if (dist != 0) {
+                vecinos.add(new Kdistance(dist, clase));
             }
         }
-        double eficacia = correctas * 100 / total;
-        System.out.println("Eficacia: " + eficacia + "%");
+        Herramientas.ordenarDistancias(vecinos);
+        String resultado = verificarVecindades(vecinos);
+        patron.setClaseResultante(resultado);
     }
 
     private ArrayList<String> obtenerClases(ArrayList<Patron> instancias) {
@@ -55,18 +50,6 @@ public class Knn implements ClasificadorInterface{
             }
         }
         return clases;
-    }
-
-    private ArrayList<Kdistance> construirVecindades(Patron patron) {
-        ArrayList<Kdistance> vecinos = new ArrayList<>();
-        for (Patron aux : this.instancias) {
-            String clase = aux.getClase();
-            double dist = Herramientas.distanciaEuclidiana(patron, aux);
-            if (dist != 0) {
-                vecinos.add(new Kdistance(dist, clase));
-            }
-        }
-        return vecinos;
     }
 
     private String verificarVecindades(ArrayList<Kdistance> vecinos) {
