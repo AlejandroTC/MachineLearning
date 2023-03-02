@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MachineLearning",
+            "request": "launch",
+            "mainClass": "machinelearning.MachineLearning",
+            "projectName": "MachineLearning_d7d1907c"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

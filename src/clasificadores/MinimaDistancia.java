@@ -30,7 +30,7 @@ public class MinimaDistancia implements ClasificadorInterface{
         // iterar las medias
         for(PatronRepresentativo pr: medias)pr.promediar();
        
-        }
+    }
 
     private boolean existeRepresentativo(ArrayList<PatronRepresentativo> medias, Patron p) {
         
