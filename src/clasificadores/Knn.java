@@ -11,7 +11,6 @@ import data.Herramientas;
 import java.util.ArrayList;
 
 public class Knn implements ClasificadorInterface{
-
     private ArrayList<Patron> instancias;
     private ArrayList<String> clases;
     private int k;
@@ -28,22 +27,9 @@ public class Knn implements ClasificadorInterface{
     }
 
     @Override
-    public void clasificar(Patron patron) {     //Clasificacion del patron
-        ArrayList<Kdistance> vecinos = vecinos(patron);
-        String resultado = this.clases.get(0); // Se toma la primera clase como default
-        int maxVecinos = 0;
-        for (int i = 0; i < this.clases.size(); i++) {
-            int contadores = 0;
-            for (Kdistance aux : vecinos) {
-                if (aux.getVecinos().equals(this.clases.get(i))) {
-                    contadores++;
-                }
-            }
-            if (contadores > maxVecinos) {
-                maxVecinos = contadores;
-                resultado = this.clases.get(i);
-            }
-        }
+    public void clasificar(Patron patron) {     //Clasificación del patrón
+        ArrayList<Kdistance> vecinos = construirVecindades(patron);
+        String resultado = verificarVecindades(vecinos);
         patron.setClaseResultante(resultado);
     }
 
@@ -71,7 +57,7 @@ public class Knn implements ClasificadorInterface{
         return clases;
     }
 
-    private ArrayList<Kdistance> vecinos(Patron patron) {
+    private ArrayList<Kdistance> construirVecindades(Patron patron) {
         ArrayList<Kdistance> vecinos = new ArrayList<>();
         for (Patron aux : this.instancias) {
             String clase = aux.getClase();
@@ -81,5 +67,18 @@ public class Knn implements ClasificadorInterface{
             }
         }
         return vecinos;
+    }
+
+    private String verificarVecindades(ArrayList<Kdistance> vecinos) {
+        int[] contadores = new int[this.clases.size()];
+        for (Kdistance aux : vecinos) {
+            String clase = aux.getVecinos();
+            int i = this.clases.indexOf(clase);
+            contadores[i]++;
+            if (contadores[i] == this.k) {
+                return this.clases.get(i);
+            }
+        }
+        return "Desconocida";
     }
 }
