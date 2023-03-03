@@ -23,17 +23,24 @@ public class Herramientas {
     return Math.sqrt(acu);
     }
 
-    public static void ordenarDistancias(ArrayList<Kdistance> distancias){
-        Kdistance temp;
-        for (int i=1; i<distancias.size(); i++){
-            for(int j=0; j< distancias.size() - i; j++){
-                if (distancias.get(j).getDistancia() > distancias.get(j+1).getDistancia()){
-                    temp = new Kdistance(distancias.get(j).getDistancia(), distancias.get(j).getVecinos());
-                    distancias.set(j, new Kdistance(temp.getDistancia(), temp.getVecinos()));
-                    distancias.set(j+1, temp);
-                }
+    public static void ordenarDistancias (DistanciaKnn[] distancias){
+        DistanciaKnn temp;
+        for (int i=1; i<distancias.length; i++){
+            for (int j=0 ; j<distancias.length - i; j++){
+                    // verificar si se hará el intercambio
+                    if (distancias[j].getDistancia() > distancias[j+1].getDistancia()){
+                        temp = new DistanciaKnn(distancias[j].getDistancia(),
+                                distancias[j].getRefClase());
+                        distancias[j] = new DistanciaKnn(distancias[j+1].getDistancia(),
+                                distancias[j+1].getRefClase());
+                        distancias[j+1] = new DistanciaKnn(temp.getDistancia(),
+                                temp.getRefClase());
+                    
+                    }
             }
+        
         }
+    
     }
 
 
