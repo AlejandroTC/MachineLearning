@@ -52,7 +52,7 @@ public class Knn implements ClasificadorInterface{
         int pos;
         for(int i=0;i<distancias.length;i++){
             String clase = distancias[i].getRefClase();
-            pos = contadores.indexOf(clase);        //Se supone que el este y el siguiente if no funcionan bien
+            pos = contadores.indexOf(clase);        //
             if(pos>=0){
                 contadores.get(pos).acumular();
                 if(contadores.get(pos).getCantidad()==this.k){

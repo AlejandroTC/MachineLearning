@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package machinelearning;
-
 import java.util.ArrayList;
-
 import clasificadores.Knn;
 /*
 import clasificadores.MinimaDistancia;
@@ -16,15 +9,9 @@ import data.PatronRepresentativo;
 import java.util.ArrayList;
 import data.Entrenamiento;
 */
-
 import data.Herramientas;
 import data.Patron;
 
-
-/**
- *
- * @author roban
- */
 public class MachineLearning {
 
     /**
@@ -71,5 +58,4 @@ public class MachineLearning {
         //Para Debug
         System.out.println();
     }
-    
 }
