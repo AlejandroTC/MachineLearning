@@ -57,8 +57,8 @@ public class ContadorKnn {
 
     @Override
     public boolean equals(Object o) {
-        
-        return this.clase.equals(o); //To change body of generated methods, choose Tools | Templates.
+        ContadorKnn aux = (ContadorKnn) o;
+        return this.clase.equals(aux.getClase()); //To change body of generated methods, choose Tools | Templates.
     }
     
     
