@@ -5,13 +5,13 @@
  */
 package machinelearning;
 
-/*
+
 import clasificadores.MinimaDistancia;
 import data.Herramientas;
 import data.Patron;
 import data.PatronRepresentativo;
 import java.util.ArrayList;
-*/
+
 import data.Entrenamiento;
 
 
@@ -25,6 +25,7 @@ public class MachineLearning {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         /*
         Patron a = new Patron(new double[]{4,1}, "A");
         Patron a1 = new Patron(new double[]{6,9}, "A");
@@ -35,7 +36,7 @@ public class MachineLearning {
         Patron a6 = new Patron(new double[]{23,0.11}, "F");
         Patron a7 = new Patron(new double[]{23,0.11}, "F");
         //Patron b = new Patron(new double[]{7,8}, "B");
-        ArrayList<Patron> lista = new ArrayList<>();
+        
         lista.add(a);
         lista.add(a1);
         lista.add(a2);
@@ -46,10 +47,10 @@ public class MachineLearning {
         lista.add(a7);
         */
         Entrenamiento.lectura();
-        /*Patron des = new Patron(new double[]{2.34,1.45},"Desconocido");
+        Patron des = new Patron(new double[]{2.34,1.45},"Desconocido");
         MinimaDistancia md = new MinimaDistancia();
-        md.entrenar(lista);
-        md.clasificar(des);*/
+        
+        md.clasificar(des);
         System.out.println();
     }
     

@@ -74,7 +74,8 @@ public class MinimaDistancia implements ClasificadorInterface{
         int c=0;                //Para contar en cuantos fue eficaz
         for (Patron aux:conjunto){
             clasificar(aux);
-            if(aux.getClase() == aux.getClaseResultante())c++;  
+            System.out.println();
+            if(aux.getClase().equals(aux.getClaseResultante()))c++;  
             //Despues de clasificar, se obtiene la clase y clase resultante para 
             //verificar si son iguales, si es asi se suma a la cuenta
         }
@@ -83,5 +84,12 @@ public class MinimaDistancia implements ClasificadorInterface{
         //Proceso iterativo de la coleccion "conjunto"
         double h = (double)100/conjunto.size();
         this.eficacia = h *c; //Finalizado la clasificacion etnonces se obtiene el %
+        System.out.println();
     } 
+    /**
+     * @return the eficacia
+     */
+    public double getEficacia() {
+        return eficacia;
+    }
 }
