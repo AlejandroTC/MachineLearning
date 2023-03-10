@@ -31,6 +31,22 @@ public class MatrizConfusion {
            this.matriz[r][c]++;
        }
        System.out.println();
+       calcular();
     }
     
+    private void calcular(){
+        int m = this.clases.size();
+        double total = 0;//Suma
+        double verdaderos = 0;//Suma
+        for(int i=0; i<m;i++){
+            for(int j=0; j<m;j++){
+                //verdaderos
+                if(i == j){
+                    verdaderos += this.matriz[i][j]; 
+                }
+                total += this.matriz[i][j];
+            }   
+        }
+        System.out.println();
+    }
 }
