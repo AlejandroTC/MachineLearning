@@ -2,6 +2,7 @@ package clasificadores;
 
 import data.ClasificadorInterface;
 import data.Herramientas;
+import data.MatrizConfusion;
 import data.Patron;
 import data.PatronRepresentativo;
 import java.util.ArrayList;
@@ -84,6 +85,7 @@ public class MinimaDistancia implements ClasificadorInterface{
         //Proceso iterativo de la coleccion "conjunto"
         double h = (double)100/conjunto.size();
         this.eficacia = h *c; //Finalizado la clasificacion etnonces se obtiene el %
+        MatrizConfusion mc = new MatrizConfusion(conjunto);
         System.out.println();
     } 
     /**

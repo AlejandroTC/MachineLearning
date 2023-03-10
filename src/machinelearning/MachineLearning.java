@@ -1,21 +1,14 @@
 package machinelearning;
-<<<<<<< HEAD
-
-
-=======
 import java.util.ArrayList;
 import clasificadores.Knn;
+import clasificadores.MinimaDistancia;
+import data.Entrenamiento;
 /*
->>>>>>> 108fcf6d8a9e113e92b9eaa5e88f994302ca2daa
 import clasificadores.MinimaDistancia;
 import data.Herramientas;
 import data.Patron;
 import data.PatronRepresentativo;
 import java.util.ArrayList;
-<<<<<<< HEAD
-
-=======
->>>>>>> 108fcf6d8a9e113e92b9eaa5e88f994302ca2daa
 import data.Entrenamiento;
 */
 import data.Herramientas;
@@ -47,32 +40,24 @@ public class MachineLearning {
         lista.add(a4);
         lista.add(a5);
         lista.add(a6);
-        lista.add(a7);
-        
+        lista.add(a7);*/
+        ArrayList<Patron> lista = new ArrayList<>();
         Entrenamiento.lectura();
-<<<<<<< HEAD
-        Patron des = new Patron(new double[]{2.34,1.45},"Desconocido");
-        MinimaDistancia md = new MinimaDistancia();
-        
-        md.clasificar(des);
-=======
-        */
-        /* //Minima distancia entrenamiento lectura de archivos
         Patron des = new Patron(new double[]{2.34,1.45},"Desconocido");
         MinimaDistancia md = new MinimaDistancia();
         md.entrenar(lista);
-        md.clasificar(des);*/
+        md.clasificar(des);
+        System.out.println();
 
         //Knn entrenamiento
-        ArrayList<Patron> setEntrenamiento = Herramientas.abrirArchivo();
+        /*ArrayList<Patron> setEntrenamiento = Herramientas.abrirArchivo();
         System.out.println();
         Patron des = new Patron(new double[]{2.34,1.45},"Desconocido");
         Knn knn = new Knn(2);
         knn.entrenar(setEntrenamiento);
-        knn.clasificar(des);
+        knn.clasificar(des);*/
 
         //Para Debug
->>>>>>> 108fcf6d8a9e113e92b9eaa5e88f994302ca2daa
         System.out.println();
     }
 }
