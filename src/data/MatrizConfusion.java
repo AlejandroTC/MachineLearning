@@ -32,18 +32,5 @@ public class MatrizConfusion {
        }
        System.out.println();
     }
-
-    @Override
-    public String toString() {
-        String aux = "";
-        for(int r=0;r<this.matriz.length;r++){
-            aux+="|";
-            for(int c=0;c<this.matriz[0].length;c++){
-                aux+=" "+this.matriz[r][c]+",";
-            }
-            aux+="\n";
-        }
-        return aux;
-    }
     
 }
