@@ -1,84 +1,73 @@
-package clasificadores;
 /*
- * 1.- Distancia para inferencias importantes
- * 2.- La construcción de vecinidades
- * 3.- Establecer una cantidad fija de vecinidad representativa para poder realizar la clasificación
-*/
-import data.Kdistance;
-import data.Patron;
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package clasificadores;
+
+import com.sun.corba.se.pept.transport.ContactInfoListIterator;
 import data.ClasificadorInterface;
+import data.ContadorKnn;
+import data.DistanciaKnn;
 import data.Herramientas;
+import data.Patron;
 import java.util.ArrayList;
 
+/**
+ * 1.- distancia
+ * 2.- la construcción de vecinidades
+ * 3.- establacer una cantidad fija de
+ * vecinidad representativa para poder 
+ * realizar la clasificación
+ * @author robanac
+ */
 public class Knn implements ClasificadorInterface{
-    private ArrayList<Patron> instancias;
-    private ArrayList<String> clases;
-    private int k;
-
-    public Knn(int k) {     //Constructor
+    ArrayList<Patron> conjuntoEntrenamiento;
+    int k;
+    public Knn(int k) {
         this.k = k;
-        this.clases = new ArrayList<>();
+    }
+        
+    @Override
+    public void entrenar(ArrayList<Patron> aux) {
+        this.conjuntoEntrenamiento = aux;
     }
 
     @Override
-    public void entrenar(ArrayList<Patron> instancias) {    //Almacenar lista y clase de patrones
-        this.instancias = instancias;
-        this.clases = obtenerClases(instancias);
-    }
-
-    @Override
-    public void clasificar(Patron patron) {     //Clasificación del patrón
-        ArrayList<Kdistance> vecinos = construirVecindades(patron);
-        String resultado = verificarVecindades(vecinos);
-        patron.setClaseResultante(resultado);
-    }
-
-    public void clasificaConjunto(ArrayList<Patron> instancias) {
-        int total = instancias.size();
-        int correctas = 0;
-        for (Patron patron : instancias) {
-            clasificar(patron);
-            if (patron.getClaseResultante().equals(patron.getClase())) {
-                correctas++;
+    public void clasificar(Patron aux) {
+        DistanciaKnn distancias[] =
+                new DistanciaKnn[this.conjuntoEntrenamiento.size()];
+        // distancia
+        for(int i=0; i < this.conjuntoEntrenamiento.size();i++){
+            double d = Herramientas.distanciaEuclidiana(aux,
+                    this.conjuntoEntrenamiento.get(i));
+            String c = this.conjuntoEntrenamiento.get(i).getClase();
+            distancias[i] = new DistanciaKnn(d,c);
+           
+        }
+        // ordenar
+        Herramientas.ordenarDistancias(distancias);
+        //verificar K (recorriendo las distancias)
+        ArrayList<ContadorKnn> contadores = new ArrayList<>();
+        int pos;
+        for(int i=0;i<distancias.length;i++){
+            String clase = distancias[i].getRefClase();
+            ContadorKnn c = new ContadorKnn(clase);
+            pos = contadores.indexOf(c);        //
+            if(pos>=0){
+                contadores.get(pos).acumular();
+                if(contadores.get(pos).getCantidad()==this.k){
+                   // clasificación
+                   aux.setClaseResultante(contadores.get(pos).getClase());
+                   break;
+                }
+                
+            }else{
+                contadores.add(new ContadorKnn(clase));
             }
         }
-        double eficacia = correctas * 100 / total;
-        System.out.println("Eficacia: " + eficacia + "%");
+        System.out.println();
+        
     }
-
-    private ArrayList<String> obtenerClases(ArrayList<Patron> instancias) {
-        ArrayList<String> clases = new ArrayList<>();
-        for (Patron patron : instancias) {
-            String clase = patron.getClase();
-            if (!clases.contains(clase)) {
-                clases.add(clase);
-            }
-        }
-        return clases;
-    }
-
-    private ArrayList<Kdistance> construirVecindades(Patron patron) {
-        ArrayList<Kdistance> vecinos = new ArrayList<>();
-        for (Patron aux : this.instancias) {
-            String clase = aux.getClase();
-            double dist = Herramientas.distanciaEuclidiana(patron, aux);
-            if (dist != 0) {
-                vecinos.add(new Kdistance(dist, clase));
-            }
-        }
-        return vecinos;
-    }
-
-    private String verificarVecindades(ArrayList<Kdistance> vecinos) {
-        int[] contadores = new int[this.clases.size()];
-        for (Kdistance aux : vecinos) {
-            String clase = aux.getVecinos();
-            int i = this.clases.indexOf(clase);
-            contadores[i]++;
-            if (contadores[i] == this.k) {
-                return this.clases.get(i);
-            }
-        }
-        return "Desconocida";
-    }
+    
 }

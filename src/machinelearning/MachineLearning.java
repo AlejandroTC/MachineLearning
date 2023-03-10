@@ -1,24 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package machinelearning;
+<<<<<<< HEAD
 
 
+=======
+import java.util.ArrayList;
+import clasificadores.Knn;
+/*
+>>>>>>> 108fcf6d8a9e113e92b9eaa5e88f994302ca2daa
 import clasificadores.MinimaDistancia;
 import data.Herramientas;
 import data.Patron;
 import data.PatronRepresentativo;
 import java.util.ArrayList;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 108fcf6d8a9e113e92b9eaa5e88f994302ca2daa
 import data.Entrenamiento;
+*/
+import data.Herramientas;
+import data.Patron;
 
-
-/**
- *
- * @author roban
- */
 public class MachineLearning {
 
     /**
@@ -27,6 +29,7 @@ public class MachineLearning {
     public static void main(String[] args) {
         
         /*
+        //Entrenamiento minima distancia con datos especificos
         Patron a = new Patron(new double[]{4,1}, "A");
         Patron a1 = new Patron(new double[]{6,9}, "A");
         Patron a2 = new Patron(new double[]{5.6,9}, "B");
@@ -45,13 +48,31 @@ public class MachineLearning {
         lista.add(a5);
         lista.add(a6);
         lista.add(a7);
-        */
+        
         Entrenamiento.lectura();
+<<<<<<< HEAD
         Patron des = new Patron(new double[]{2.34,1.45},"Desconocido");
         MinimaDistancia md = new MinimaDistancia();
         
         md.clasificar(des);
+=======
+        */
+        /* //Minima distancia entrenamiento lectura de archivos
+        Patron des = new Patron(new double[]{2.34,1.45},"Desconocido");
+        MinimaDistancia md = new MinimaDistancia();
+        md.entrenar(lista);
+        md.clasificar(des);*/
+
+        //Knn entrenamiento
+        ArrayList<Patron> setEntrenamiento = Herramientas.abrirArchivo();
+        System.out.println();
+        Patron des = new Patron(new double[]{2.34,1.45},"Desconocido");
+        Knn knn = new Knn(2);
+        knn.entrenar(setEntrenamiento);
+        knn.clasificar(des);
+
+        //Para Debug
+>>>>>>> 108fcf6d8a9e113e92b9eaa5e88f994302ca2daa
         System.out.println();
     }
-    
 }
