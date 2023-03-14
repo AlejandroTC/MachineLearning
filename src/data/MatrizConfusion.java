@@ -34,11 +34,13 @@ public class MatrizConfusion {
        }
        System.out.println();
        calcularexatitud();
-       calcularprecision();
+       
     }
     
     private void calcularexatitud(){
         int m = this.clases.size();
+        double todo = 0;//Suma
+        this.precision = new double[m][1];
         double total = 0;//Suma
         double verdaderos = 0;//Suma
         for(int i=0; i<m;i++){
@@ -48,27 +50,12 @@ public class MatrizConfusion {
                     verdaderos += this.matriz[i][j]; 
                 }
                 total += this.matriz[i][j];
-            }   
-        }
-        exactitud = verdaderos/total;
-        System.out.println();
-    }
-    private void calcularprecision(){
-        int m = this.clases.size();
-        double todo = 0;//Suma
-        double verdad = 0;//Suma
-        precision = new double[m][1];
-        for(int i=0; i<m;i++){
-            for(int j=0; j<m;j++){
-                //verdaderos
-                if(i == j){
-                    verdad = this.matriz[i][j]; 
-                }
                 todo += this.matriz[i][j];
             }   
-            precision[i][0] = verdad /todo;
+            this.precision[i][0] = verdaderos /todo;
             todo = 0;
         }
+        this.exactitud = verdaderos / total;
         System.out.println();
     }
 }
