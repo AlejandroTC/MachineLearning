@@ -7,6 +7,8 @@ public class MatrizConfusion {
     private double[][] matriz;
     private ArrayList<Patron> conjunto;
     private ArrayList<String> clases;
+    private double precision[][];
+    private double exactitud;
 
     public MatrizConfusion(ArrayList<Patron> conjunto) {
         this.conjunto = conjunto;
@@ -31,10 +33,11 @@ public class MatrizConfusion {
            this.matriz[r][c]++;
        }
        System.out.println();
-       calcular();
+       calcularexatitud();
+       calcularprecision();
     }
     
-    private void calcular(){
+    private void calcularexatitud(){
         int m = this.clases.size();
         double total = 0;//Suma
         double verdaderos = 0;//Suma
@@ -46,6 +49,25 @@ public class MatrizConfusion {
                 }
                 total += this.matriz[i][j];
             }   
+        }
+        exactitud = verdaderos/total;
+        System.out.println();
+    }
+    private void calcularprecision(){
+        int m = this.clases.size();
+        double todo = 0;//Suma
+        double verdad = 0;//Suma
+        precision = new double[m][1];
+        for(int i=0; i<m;i++){
+            for(int j=0; j<m;j++){
+                //verdaderos
+                if(i == j){
+                    verdad = this.matriz[i][j]; 
+                }
+                todo += this.matriz[i][j];
+            }   
+            precision[i][0] = verdad /todo;
+            todo = 0;
         }
         System.out.println();
     }
